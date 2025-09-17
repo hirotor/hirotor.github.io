@@ -3,72 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>私の自己紹介</title>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f4;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            /* グラデーション背景 */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            max-width: 700px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            /* 影をつけて立体感を出す */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #333;
             text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
         }
         .profile-section {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .profile-section h2 {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
+            font-size: 1.5em;
+            color: #34495e;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        p, ul {
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        ul {
+            list-style-type: none; /* 点を消す */
+            padding: 0;
+        }
+        ul li {
+            background: #f9f9f9;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .sns-links {
+            text-align: center;
+            margin-top: 20px;
         }
         .sns-links a {
-            text-decoration: none;
-            color: #007bff;
-            margin-right: 15px;
+            font-size: 2em; /* アイコンサイズ */
+            color: #34495e;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .sns-links a:hover {
+            color: #3498db; /* ホバー時の色変更 */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>髙塚 浩斗の自己紹介</h1>
+        <h1>Hiroto Takatsuka's Profile</h1>
 
         <div class="profile-section">
-            <h2>基本情報</h2>
+            <h2><i class="fas fa-user"></i> About Me</h2>
             <p>
-                こんにちは！髙塚浩斗です。<br>
-                立命館大学情報理工学部セキュリティ・ネットワークコースです。
+                こんにちは、髙塚浩斗です。<br>
+                仲良くしてください！！！
             </p>
         </div>
 
         <div class="profile-section">
-            <h2>好きなこと・趣味</h2>
+            <h2><i class="fas fa-graduation-cap"></i> 学歴</h2>
             <ul>
-                <li>筋トレ</li>
-                <li>ランニング</li>
-                <li>サウナ</li>
-                <li>お金を稼ぐこと</li>
+                <li>立命館大学 情報理工学部 セキュリティ・ネットワークコース 在学</li>
+                <li>佐久長聖高等学校 卒業</li>
+                <li>月州中学校 卒業</li>
+                <li>錦西小学校 卒業</li>
+                <li>青英学園幼稚園 卒園</li>
             </ul>
         </div>
 
         <div class="profile-section">
-            <h2>SNS・リンク</h2>
-            <div class="sns-links">
-                <a href="https://www.instagram.com/hirotor68" target="_blank">Instagram</a>
-                <a href="https://www.instagram.com/hirotor_sb68" target="_blank">Instagram</a>
-            </div>
+            <h2><i class="fas fa-gamepad"></i> 趣味</h2>
+            <ul>
+                <li>筋トレ</li>
+                <li>野球観戦</li>
+                <li>ランニング</li>
+            </ul>
         </div>
 
+        <div class="profile-section">
+            <h2><i class="fas fa-utensils"></i> 好きな食べ物・飲み物</h2>
+            <ul>
+                <li>ラーメン</li>
+                <li>寿司</li>
+                <li>玉子豆腐</li>
+                <li>牛乳</li>
+            </ul>
+        </div>
+        <div class="profile-section">
+            <h2><i class="fas fa-music"></i> 好きなアーティスト</h2>
+            <ul>
+                <li>King Gnu</li>
+                <li>いきものがかり</li>
+                <li>西野カナ</li>
+                <li>Mr.Children</li>
+                <li>緑黄色社会</li>
+                <li>SEKAI NO OWARI</li>
+                <li>sumica</li>
+            </ul>
+        </div>
+
+        <div class="profile-section">
+            <h2><i class="fas fa-link"></i> Links</h2>
+            <div class="sns-links">
+                <a href="https://www.instagram.com/hirotor68" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/hirotor_sb68" target="_blank" title="Instagram (Sub)"><i class="fab fa-instagram"></i></a>
+                <a href="https://line.me/ti/p/hi_takatsuka_" target="_blank" title="LINE"><i class="fab fa-line"></i></a>
+            </div>
+        </div>
     </div>
 
 </body>
