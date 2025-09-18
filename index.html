@@ -6,69 +6,114 @@
     <title>My Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            /* グラデーション背景 */
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            /* 動きのあるグラデーション背景 */
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
+
+        /* 背景グラデーションを動かすためのアニメーション設定 */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container {
             max-width: 800px;
             width: 100%;
-            background: #ffffff;
+            /* 半透明な背景（グラスモーフィズム） */
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
             padding: 40px;
-            border-radius: 15px;
-            /* 影をつけて立体感を出す */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            /* コンテナがふわっと表示されるアニメーション */
+            animation: fadeIn 1s ease-out;
         }
+
+        /* ふわっと表示させるアニメーション設定 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         h1 {
             text-align: center;
             color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 2.5em;
+            margin-bottom: 40px;
+            font-size: 2.8em;
+            /* 文字に影をつける */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
         .profile-section {
             margin-bottom: 30px;
         }
         .profile-section h2 {
-            font-size: 1.5em;
+            font-size: 1.6em;
             color: #34495e;
-            border-bottom: 3px solid #3498db;
+            /* 下線をグラデーションに */
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(to right, #ff9a9e, #fad0c4);
+            border-image-slice: 1;
             padding-bottom: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         p, ul {
             font-size: 1.1em;
             line-height: 1.7;
         }
         ul {
-            list-style-type: none; /* 点を消す */
+            list-style-type: none;
             padding: 0;
         }
         ul li {
-            background: #f9f9f9;
-            margin-bottom: 8px;
-            padding: 10px;
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            /* マウスを乗せたときの動きを滑らかに */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        /* リスト項目にマウスを乗せると少し浮き上がる */
+        ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
         .sns-links {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         .sns-links a {
-            font-size: 2em; /* アイコンサイズ */
+            font-size: 2.5em;
             color: #34495e;
-            margin: 0 15px;
-            transition: color 0.3s;
+            margin: 0 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
+
+        /* SNSアイコンにマウスを乗せると大きくなり、色が変わる */
         .sns-links a:hover {
-            color: #3498db; /* ホバー時の色変更 */
+            transform: scale(1.3);
+            color: #ff6b6b; /* ホバー時の色 */
         }
     </style>
 </head>
@@ -81,6 +126,8 @@
             <h2><i class="fas fa-user"></i> About Me</h2>
             <p>
                 こんにちは、髙塚浩斗です。<br>
+                バファローズファン探してます！
+                英語が苦手すぎなので克服する良い方法あれば教えてください(*- -)(*_ _)
                 仲良くしてください！！！
             </p>
         </div>
@@ -89,10 +136,19 @@
             <h2><i class="fas fa-graduation-cap"></i> 学歴</h2>
             <ul>
                 <li>立命館大学 情報理工学部 セキュリティ・ネットワークコース 在学</li>
-                <li>佐久長聖高等学校 卒業</li>
+                <li>駿台予備学校 高卒クラス 修了</li>
+                <li>佐久長聖高等学校 １類 卒業</li>
                 <li>月州中学校 卒業</li>
                 <li>錦西小学校 卒業</li>
                 <li>青英学園幼稚園 卒園</li>
+            </ul>
+        </div>
+
+        <div class="profile-section">
+            <h2><i class="fas fa-flag"></i> 将来設計</h2>
+            <ul>
+                <li>情報理工学部で学びながら、自分のスキルを活かして高い収入を得られるようになる</li>
+                <li>一生涯、鍛え続けて強靭な身体になる</li>
             </ul>
         </div>
 
@@ -106,14 +162,23 @@
         </div>
 
         <div class="profile-section">
+            <h2><i class="fas fa-book"></i> 好きな科目</h2>
+            <ul>
+                <li>数学</li>
+                <li>化学</li>
+                <li>体育</li>
+            </ul>
+        </div>
+
+        <div class="profile-section">
             <h2><i class="fas fa-utensils"></i> 好きな食べ物・飲み物</h2>
             <ul>
                 <li>ラーメン</li>
                 <li>寿司</li>
-                <li>玉子豆腐</li>
                 <li>牛乳</li>
             </ul>
         </div>
+
         <div class="profile-section">
             <h2><i class="fas fa-music"></i> 好きなアーティスト</h2>
             <ul>
