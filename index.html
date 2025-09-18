@@ -6,15 +6,14 @@
     <title>My Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-
         body {
             font-family: 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            /* 動きのあるグラデーション背景 */
-            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            padding: 40px 20px; /* 上下の余白を調整 */
+            /* よりリッチなグラデーション背景 */
+            background: linear-gradient(45deg, #4854e0, #ff6b6b, #feca57, #45b649);
+            background-size: 600% 600%;
+            animation: gradientBG 20s ease infinite;
             color: #333;
             display: flex;
             justify-content: center;
@@ -22,7 +21,6 @@
             min-height: 100vh;
         }
 
-        /* 背景グラデーションを動かすためのアニメーション設定 */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -32,50 +30,56 @@
         .container {
             max-width: 800px;
             width: 100%;
-            /* 半透明な背景（グラスモーフィズム） */
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(15px);
+            padding: 50px;
+            border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            /* コンテナがふわっと表示されるアニメーション */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
             animation: fadeIn 1s ease-out;
+            /* 3Dエフェクトのための設定 */
+            transition: transform 0.1s ease;
+            transform-style: preserve-3d;
         }
 
-        /* ふわっと表示させるアニメーション設定 */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         h1 {
             text-align: center;
-            color: #2c3e50;
             margin-bottom: 40px;
-            font-size: 2.8em;
-            /* 文字に影をつける */
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            font-size: 3em;
+            font-weight: 700;
+            /* 文字をグラデーションにする */
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff6b6b);
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* グラデーションを動かすアニメーション */
+            animation: gradientText 4s linear infinite;
         }
+
+        @keyframes gradientText {
+            to { background-position: 200% center; }
+        }
+
         .profile-section {
             margin-bottom: 30px;
         }
         .profile-section h2 {
             font-size: 1.6em;
             color: #34495e;
-            /* 下線をグラデーションに */
             border-bottom: 3px solid transparent;
-            border-image: linear-gradient(to right, #ff9a9e, #fad0c4);
+            border-image: linear-gradient(to right, #ff6b6b, #feca57);
             border-image-slice: 1;
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
+
         p, ul {
             font-size: 1.1em;
             line-height: 1.7;
@@ -85,18 +89,39 @@
             padding: 0;
         }
         ul li {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.7);
             margin-bottom: 10px;
             padding: 12px 15px;
             border-radius: 8px;
-            /* マウスを乗せたときの動きを滑らかに */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* 連続アニメーションのための初期設定 */
+            opacity: 0;
+            transform: translateX(20px);
+            animation: fadeInItem 0.5s ease-out forwards;
         }
 
-        /* リスト項目にマウスを乗せると少し浮き上がる */
+        /* 連続アニメーションの本体 */
+        @keyframes fadeInItem {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* 項目ごとにアニメーション開始を遅らせる */
+        .profile-section ul li:nth-child(1) { animation-delay: 0.3s; }
+        .profile-section ul li:nth-child(2) { animation-delay: 0.4s; }
+        .profile-section ul li:nth-child(3) { animation-delay: 0.5s; }
+        .profile-section ul li:nth-child(4) { animation-delay: 0.6s; }
+        .profile-section ul li:nth-child(5) { animation-delay: 0.7s; }
+        .profile-section ul li:nth-child(6) { animation-delay: 0.8s; }
+        .profile-section ul li:nth-child(7) { animation-delay: 0.9s; }
+        .profile-section ul li:nth-child(8) { animation-delay: 1.0s; }
+
+
         ul li:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-5px) scale(1.03); /* 少し拡大する効果を追加 */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
         .sns-links {
@@ -110,10 +135,9 @@
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
-        /* SNSアイコンにマウスを乗せると大きくなり、色が変わる */
         .sns-links a:hover {
-            transform: scale(1.3);
-            color: #ff6b6b; /* ホバー時の色 */
+            transform: scale(1.3) rotate(10deg); /* 少し回転させる */
+            color: #ff6b6b;
         }
     </style>
 </head>
@@ -126,8 +150,8 @@
             <h2><i class="fas fa-user"></i> About Me</h2>
             <p>
                 こんにちは、髙塚浩斗です。<br>
-                バファローズファン探してます！
-                英語が苦手すぎなので克服する良い方法あれば教えてください(*- -)(*_ _)
+                バファローズファン探してます！<br>
+                英語が苦手すぎなので克服する良い方法あれば教えてください(*- -)(*_ _)<br>
                 仲良くしてください！！！
             </p>
         </div>
@@ -202,5 +226,27 @@
         </div>
     </div>
 
-</body>
+    <script>
+        const container = document.querySelector('.container');
+
+        container.addEventListener('mousemove', (e) => {
+            // コンテナの真ん中を(0,0)にする
+            const { left, top, width, height } = container.getBoundingClientRect();
+            const x = e.clientX - left - width / 2;
+            const y = e.clientY - top - height / 2;
+
+            // マウスの位置に応じて傾ける角度を計算（最大10度）
+            const rotateY = (x / (width / 2)) * -10;
+            const rotateX = (y / (height / 2)) * 10;
+
+            // CSSのtransformを更新して3D回転を適用
+            container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+
+        // マウスがコンテナから離れたら元の角度に戻す
+        container.addEventListener('mouseleave', () => {
+            container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        });
+    </script>
+    </body>
 </html>
