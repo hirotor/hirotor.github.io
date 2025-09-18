@@ -10,34 +10,30 @@
             font-family: 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 40px 20px;
-            background: linear-gradient(45deg, #4854e0, #ff6b6b, #feca57, #45b649);
-            background-size: 600% 600%;
-            animation: gradientBG 20s ease infinite;
-            color: #333;
+            /* 背景をダークカラーに */
+            background-color: #121212;
+            /* 基本の文字色を白に */
+            color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        /* 背景のアニメーションは不要になったため削除 */
 
         .container {
             max-width: 800px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(15px);
+            /* コンテナの背景を落ち着いたグラデーションに */
+            background: linear-gradient(135deg, #2c3e50, #4a6da7);
             padding: 50px;
             border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* 影を少し濃く */
             animation: fadeIn 1s ease-out;
             transition: transform 0.1s ease;
             transform-style: preserve-3d;
+            /* backdrop-filterは不要になったため削除 */
         }
 
         @keyframes fadeIn {
@@ -50,7 +46,8 @@
             margin-bottom: 40px;
             font-size: 3em;
             font-weight: 700;
-            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff6b6b);
+            /* ダークテーマに合わせたグラデーション文字 */
+            background: linear-gradient(90deg, #89f7fe, #66a6ff, #89f7fe);
             background-size: 200% auto;
             color: #fff;
             background-clip: text;
@@ -68,9 +65,11 @@
         }
         .profile-section h2 {
             font-size: 1.6em;
-            color: #34495e;
+            /* 見出しの文字色を白に */
+            color: #ffffff;
             border-bottom: 3px solid transparent;
-            border-image: linear-gradient(to right, #ff6b6b, #feca57);
+            /* 下線のグラデーションもテーマに合わせる */
+            border-image: linear-gradient(to right, #89f7fe, #66a6ff);
             border-image-slice: 1;
             padding-bottom: 10px;
             margin-bottom: 20px;
@@ -85,25 +84,25 @@
             padding: 0;
         }
         ul li {
-            background: rgba(255, 255, 255, 0.7);
+            /* リスト項目の背景を少し明るいダークカラーに */
+            background: rgba(255, 255, 255, 0.1);
             margin-bottom: 10px;
             padding: 12px 15px;
             border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             opacity: 0;
             transform: translateX(20px);
             animation: fadeInItem 0.5s ease-out forwards;
         }
 
-        /* ***** ここから追加 ***** */
         /* リスト内のアイコンのデザイン */
         ul li .fas, ul li .fab {
-            margin-right: 12px; /* アイコンと文字の間隔 */
-            color: #ff6b6b;      /* アイコンの色 */
-            width: 20px;         /* アイコンの幅を固定して文字の開始位置を揃える */
+            margin-right: 12px;
+            /* アイコンの色をテーマに合わせる */
+            color: #89f7fe;
+            width: 20px;
             text-align: center;
         }
-        /* ***** ここまで追加 ***** */
 
         @keyframes fadeInItem {
             to {
@@ -124,7 +123,8 @@
 
         ul li:hover {
             transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.2); /* ホバー時に少し明るく */
         }
 
         .sns-links {
@@ -133,14 +133,16 @@
         }
         .sns-links a {
             font-size: 2.5em;
-            color: #34495e;
+            /* SNSアイコンの色を白に */
+            color: #f0f0f0;
             margin: 0 20px;
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .sns-links a:hover {
             transform: scale(1.3) rotate(10deg);
-            color: #ff6b6b;
+            /* ホバー時の色をテーマに合わせる */
+            color: #89f7fe;
         }
     </style>
 </head>
