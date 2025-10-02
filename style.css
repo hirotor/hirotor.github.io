@@ -1,39 +1,55 @@
 /* =========================================
-   ベーススタイル (濃い青・水色・白テーマ)
+   ベーススタイル (モダンダークテーマ)
    ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 body {
-    font-family: 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 40px 20px;
-    background-color: #0a192f; /* 深いネイビーブルー */
-    color: #f0f0f0;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: #f8fafc;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
 }
 
-/* 背景にオーロラのようなアニメーションを追加 */
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* フローティングパーティクル効果 */
 body::before {
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, #0a2444, #4a90e2, #ffffff, #89f7fe, #0a2444); /* 新しいカラーテーマ */
-    background-size: 400% 400%;
-    animation: backgroundShift 20s ease infinite alternate;
-    opacity: 0.25; /* 透明度を調整 */
-    z-index: -1;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(96, 165, 250, 0.4), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(167, 243, 208, 0.3), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(251, 191, 36, 0.2), transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(244, 114, 182, 0.3), transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: float 20s linear infinite;
+    pointer-events: none;
+    z-index: 1;
 }
 
-@keyframes backgroundShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -30px) rotate(120deg); }
+    66% { transform: translate(-20px, 20px) rotate(240deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
 }
 
 
@@ -41,26 +57,68 @@ body::before {
    コンテナ
    ========================================= */
 .container {
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
-    background: linear-gradient(135deg, rgba(10, 36, 68, 0.8), rgba(25, 56, 99, 0.8)); /* 背景を濃い青の半透明に */
-    backdrop-filter: blur(10px); /* すりガラス効果 */
-    padding: 50px;
-    border: 2px solid transparent;
-    border-image: linear-gradient(to right, #89f7fe, #ffffff) 1; /* ボーダーを水色と白のグラデーションに */
-    border-radius: 25px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
-                0 0 35px rgba(137, 247, 254, 0.5); /* 影と水色のネオン */
-    animation: fadeIn 1.2s ease-out forwards;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    padding: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    box-shadow: 
+        0 32px 64px rgba(0, 0, 0, 0.4),
+        0 16px 32px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1.5s ease-out forwards;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
     position: relative;
     z-index: 10;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(96, 165, 250, 0.05) 0%,
+        rgba(167, 243, 208, 0.03) 25%,
+        rgba(251, 191, 36, 0.02) 50%,
+        rgba(244, 114, 182, 0.04) 75%,
+        rgba(139, 92, 246, 0.05) 100%);
+    border-radius: inherit;
+    z-index: -1;
+    animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
+.container:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 48px 80px rgba(0, 0, 0, 0.5),
+        0 24px 48px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    0% { 
+        opacity: 0; 
+        transform: translateY(50px) scale(0.9) rotateX(10deg); 
+        filter: blur(10px);
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1) rotateX(0deg); 
+        filter: blur(0px);
+    }
 }
 
 
@@ -69,32 +127,105 @@ body::before {
    ========================================= */
 h1 {
     text-align: center;
-    margin-bottom: 40px;
-    font-size: 3em;
+    margin-bottom: 50px;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
-    background: linear-gradient(90deg, #ffffff, #89f7fe, #4a90e2); /* 白→水色→青のグラデーション */
-    background-size: 200% auto;
-    color: #fff;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, 
+        #ffffff 0%,
+        #60a5fa 25%,
+        #a7f3d0 50%,
+        #fbbf24 75%,
+        #f472b6 100%);
+    background-size: 300% 300%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradientText 5s linear infinite;
-    text-shadow: 0 0 10px rgba(137, 247, 254, 0.7); /* 水色のテキストグロウ */
+    animation: rainbowText 6s ease-in-out infinite;
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+    border-radius: 2px;
+    animation: underlineGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes underlineGlow {
+    0% { 
+        box-shadow: 0 0 5px rgba(96, 165, 250, 0.3);
+        width: 80px;
+    }
+    100% { 
+        box-shadow: 0 0 20px rgba(96, 165, 250, 0.8);
+        width: 160px;
+    }
+}
+
+@keyframes rainbowText {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 @keyframes gradientText {
     to { background-position: -200% center; }
 }
 
+.profile-section {
+    margin-bottom: 40px;
+    animation: slideInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.profile-section:nth-child(2) { animation-delay: 0.1s; }
+.profile-section:nth-child(3) { animation-delay: 0.2s; }
+.profile-section:nth-child(4) { animation-delay: 0.3s; }
+.profile-section:nth-child(5) { animation-delay: 0.4s; }
+.profile-section:nth-child(6) { animation-delay: 0.5s; }
+.profile-section:nth-child(7) { animation-delay: 0.6s; }
+.profile-section:nth-child(8) { animation-delay: 0.7s; }
+
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .profile-section h2 {
-    font-size: 1.6em;
-    color: #ffffff;
-    border-bottom: 3px solid transparent;
-    border-image: linear-gradient(to right, #89f7fe, #4a90e2); /* 水色から青へのグラデーション下線 */
-    border-image-slice: 1;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    text-shadow: 0 0 5px rgba(137, 247, 254, 0.5);
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 600;
+    color: #f8fafc;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-section h2::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        rgba(96, 165, 250, 0.6), 
+        rgba(167, 243, 208, 0.4), 
+        transparent);
+    border-radius: 1px;
+}
+
+.profile-section h2 i {
+    color: #60a5fa;
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.4));
 }
 
 
@@ -102,95 +233,225 @@ h1 {
    リスト要素
    ========================================= */
 p, ul {
-    font-size: 1.1em;
-    line-height: 1.7;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    line-height: 1.8;
 }
+
+p {
+    color: #cbd5e1;
+    margin-bottom: 24px;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
+    display: grid;
+    gap: 12px;
 }
+
 ul li {
-    background: rgba(255, 255, 255, 0.08); /* 背景を少し明るく */
-    margin-bottom: 10px;
-    padding: 12px 15px;
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    margin-bottom: 0;
+    padding: 18px 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
-    transform: translateX(20px);
-    animation: fadeInItem 0.5s ease-out forwards;
-    border-left: 3px solid #89f7fe; /* 左側に水色のアクセントライン */
+    transform: translateX(30px);
+    animation: fadeInItem 0.6s ease-out forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #60a5fa, #a7f3d0);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
 }
 
 ul li:hover {
-    transform: translateY(-5px) scale(1.03);
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4),
-                0 0 20px #89f7fe; /* ホバー時に水色に光る */
+    transform: translateY(-8px) translateX(4px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(96, 165, 250, 0.2);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(96, 165, 250, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+ul li:hover::before {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
 }
 
 @keyframes fadeInItem {
-    to { opacity: 1; transform: translateX(0); }
+    to { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
 }
 
-.profile-section ul li:nth-child(1) { animation-delay: 0.3s; }
-.profile-section ul li:nth-child(2) { animation-delay: 0.4s; }
-.profile-section ul li:nth-child(3) { animation-delay: 0.5s; }
-.profile-section ul li:nth-child(4) { animation-delay: 0.6s; }
-.profile-section ul li:nth-child(5) { animation-delay: 0.7s; }
-.profile-section ul li:nth-child(6) { animation-delay: 0.8s; }
-.profile-section ul li:nth-child(7) { animation-delay: 0.9s; }
-.profile-section ul li:nth-child(8) { animation-delay: 1.0s; }
+.profile-section ul li:nth-child(1) { animation-delay: 0.1s; }
+.profile-section ul li:nth-child(2) { animation-delay: 0.2s; }
+.profile-section ul li:nth-child(3) { animation-delay: 0.3s; }
+.profile-section ul li:nth-child(4) { animation-delay: 0.4s; }
+.profile-section ul li:nth-child(5) { animation-delay: 0.5s; }
+.profile-section ul li:nth-child(6) { animation-delay: 0.6s; }
+.profile-section ul li:nth-child(7) { animation-delay: 0.7s; }
+.profile-section ul li:nth-child(8) { animation-delay: 0.8s; }
 
-/* アイコンの色をアニメーション */
+/* アイコンスタイル */
 ul li .fas, ul li .fab {
-    margin-right: 12px;
-    width: 20px;
+    margin-right: 16px;
+    width: 24px;
     text-align: center;
-    animation: iconColorShift 4s linear infinite;
+    color: #60a5fa;
+    filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.3));
+    transition: all 0.3s ease;
 }
 
-@keyframes iconColorShift {
-    0%   { color: #ffffff; }
-    50%  { color: #89f7fe; }
-    100% { color: #ffffff; }
+ul li:hover .fas, ul li:hover .fab {
+    color: #a7f3d0;
+    filter: drop-shadow(0 0 12px rgba(167, 243, 208, 0.6));
+    transform: scale(1.1);
 }
 
 
 /* =========================================
    SNSリンク
    ========================================= */
-.sns-links a {
-    font-size: 2.5em;
-    color: #f0f0f0;
-    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* 白いグロウ */
-}
-
-.sns-links a:hover {
-    transform: scale(1.3) rotate(10deg);
-    color: #89f7fe; /* ホバー時に水色に */
-    text-shadow: 0 0 15px #89f7fe, 0 0 25px #89f7fe; /* 強めのグロウ */
-}
-
-/* =========================================
-   SNSリンクのラベル追加スタイル
-   ========================================= */
 .sns-links {
-    display: flex; /* 横並びにするためにFlexboxを使用 */
-    justify-content: center; /* 中央揃え */
-    align-items: flex-start; /* 上端揃え */
-    gap: 25px; /* 各アイコンの間隔 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-top: 32px;
 }
 
 .sns-link-item {
-    text-align: center; /* 中の要素を中央揃えに */
+    text-align: center;
+    position: relative;
+}
+
+.sns-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    font-size: 2rem;
+    color: #f8fafc;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.sns-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.sns-links a:hover {
+    transform: translateY(-8px) scale(1.1);
+    background: rgba(96, 165, 250, 0.1);
+    border-color: rgba(96, 165, 250, 0.3);
+    color: #60a5fa;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(96, 165, 250, 0.2);
+}
+
+.sns-links a:hover::before {
+    left: 100%;
+}
+
+/* Instagram専用スタイル */
+.sns-links a[href*="instagram"]:hover {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    background-size: 200% 200%;
+    animation: instagramGradient 2s ease infinite;
+}
+
+@keyframes instagramGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* LINE専用スタイル */
+.sns-links a[href*="line"]:hover {
+    background: #00c300;
+    color: white;
 }
 
 .sns-label {
-    display: block; /* 改行してアイコンの下に表示 */
-    font-size: 0.5em; /* 文字を小さく */
-    color: #f0f0f0;
-    margin-top: 8px; /* アイコンとの隙間 */
-    font-weight: bold;
-    opacity: 0.8; /* 少しだけ透明に */
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #94a3b8;
+    margin-top: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.sns-link-item:hover .sns-label {
+    opacity: 1;
+    transform: translateY(0);
+    color: #60a5fa;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 15px;
+    }
+    
+    .container {
+        padding: 40px 30px;
+        border-radius: 24px;
+    }
+    
+    .sns-links {
+        gap: 24px;
+    }
+    
+    .sns-links a {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    ul li {
+        padding: 16px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 20px;
+    }
+    
+    .sns-links {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 }
