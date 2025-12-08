@@ -32,12 +32,16 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
+    /* パーティクルを増やしてキラキラ感を強化 */
     background-image: 
-        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(96, 165, 250, 0.4), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(167, 243, 208, 0.3), transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(251, 191, 36, 0.2), transparent),
-        radial-gradient(2px 2px at 160px 30px, rgba(244, 114, 182, 0.3), transparent);
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(3px 3px at 40px 70px, rgba(96, 165, 250, 0.6), transparent),
+        radial-gradient(2px 2px at 90px 40px, rgba(167, 243, 208, 0.5), transparent),
+        radial-gradient(3px 3px at 130px 80px, rgba(251, 191, 36, 0.4), transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(244, 114, 182, 0.5), transparent),
+        radial-gradient(1px 1px at 200px 100px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 240px 50px, rgba(96, 165, 250, 0.5), transparent),
+        radial-gradient(1px 1px at 280px 20px, rgba(167, 243, 208, 0.3), transparent);
     background-repeat: repeat;
     background-size: 200px 200px;
     animation: float 20s linear infinite;
@@ -204,7 +208,19 @@ h1::after {
 .profile-section h2 {
     font-size: clamp(1.3rem, 2.5vw, 1.8rem);
     font-weight: 600;
-    color: #f8fafc;
+    /* h1と同じレインボーグラデーションを適用 */
+    background: linear-gradient(135deg, 
+        #ffffff 0%,
+        #60a5fa 25%,
+        #a7f3d0 50%,
+        #fbbf24 75%,
+        #f472b6 100%);
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowText 6s ease-in-out infinite;
+    /* color: #f8fafc;  <- 削除 */
     margin-bottom: 24px;
     padding-bottom: 12px;
     position: relative;
@@ -217,7 +233,9 @@ h1::after {
     content: '';
     flex: 1;
     height: 2px;
+    /* 下線の色をグラデーションに合わせる */
     background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.8), /* 白を強くしてキラキラ感を出す */
         rgba(96, 165, 250, 0.6), 
         rgba(167, 243, 208, 0.4), 
         transparent);
@@ -225,8 +243,9 @@ h1::after {
 }
 
 .profile-section h2 i {
-    color: #60a5fa;
-    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.4));
+    /* アイコンの色とシャドウを強化 */
+    color: #ffffff; /* アイコン自体は白にして、シャドウで色を出す */
+    filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.8)) drop-shadow(0 0 5px #a7f3d0);
 }
 
 
@@ -263,6 +282,14 @@ ul li {
     animation: fadeInItem 0.6s ease-out forwards;
     position: relative;
     overflow: hidden;
+    /* テキストにもグラデーションを適用 */
+    background-image: linear-gradient(135deg, 
+        #f8fafc 0%,
+        #a7f3d0 50%,
+        #fbbf24 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 ul li::before {
@@ -313,14 +340,17 @@ ul li .fas, ul li .fab {
     margin-right: 16px;
     width: 24px;
     text-align: center;
-    color: #60a5fa;
-    filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.3));
+    /* アイコンの色を統一 */
+    color: #ffffff;
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));
     transition: all 0.3s ease;
+    /* リストアイテムのグラデーションに影響されないように上書き */
+    -webkit-text-fill-color: currentColor; 
 }
 
 ul li:hover .fas, ul li:hover .fab {
     color: #a7f3d0;
-    filter: drop-shadow(0 0 12px rgba(167, 243, 208, 0.6));
+    filter: drop-shadow(0 0 12px rgba(167, 243, 208, 0.8));
     transform: scale(1.1);
 }
 
@@ -345,138 +375,4 @@ ul li:hover .fas, ul li:hover .fab {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 72px;
-    height: 72px;
-    font-size: 2rem;
-    color: #f8fafc;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-}
-
-.sns-links a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.6s ease;
-}
-
-.sns-links a:hover {
-    transform: translateY(-8px) scale(1.1);
-    background: rgba(96, 165, 250, 0.1);
-    border-color: rgba(96, 165, 250, 0.3);
-    color: #60a5fa;
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.3),
-        0 0 30px rgba(96, 165, 250, 0.2);
-}
-
-.sns-links a:hover::before {
-    left: 100%;
-}
-
-/* Instagram専用スタイル（メインアカウント用） */
-.sns-links a[href*="instagram"]:hover {
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-    background-size: 200% 200%;
-    animation: instagramGradient 2s ease infinite;
-}
-
-@keyframes instagramGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* LINE専用スタイル */
-.sns-links a[href*="line"]:hover {
-    background: #00c300;
-    color: white;
-}
-
-/* サブInstagramアカウントの視覚的な区別 */
-.sub-insta-item a {
-    /* デフォルトのスタイルを上書き */
-    border: 1px dashed rgba(255, 255, 255, 0.3); /* 点線にしてサブ感を出す */
-    color: #94a3b8; /* メインより控えめな色 */
-}
-
-.sub-insta-item a:hover {
-    /* メインのホバースタイルを上書き */
-    border: 1px solid #f472b6; /* ホバー時にピンク系の色を強調 */
-    color: #f472b6;
-    background: rgba(244, 114, 182, 0.1);
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.3),
-        0 0 30px rgba(244, 114, 182, 0.2);
-    animation: none; /* メインのInstagramアニメーションを無効化 */
-}
-
-
-/* SNSラベルを常に表示し、より分かりやすくする */
-.sns-label {
-    display: block;
-    font-size: 0.8rem; /* 少し大きく */
-    font-weight: 600; /* 太字に */
-    color: #94a3b8;
-    margin-top: 10px;
-    opacity: 1; /* 常に表示 */
-    transform: translateY(0); /* 位置固定 */
-    transition: color 0.3s ease;
-}
-
-.sns-link-item:hover .sns-label {
-    /* ホバー時の色の変化のみを残す */
-    color: #60a5fa;
-}
-
-.sub-insta-item:hover .sns-label {
-    /* サブアカウントのホバー時はピンク系にする */
-    color: #f472b6;
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    body {
-        padding: 20px 15px;
-    }
-    
-    .container {
-        padding: 40px 30px;
-        border-radius: 24px;
-    }
-    
-    .sns-links {
-        gap: 24px;
-    }
-    
-    .sns-links a {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-    
-    ul li {
-        padding: 16px 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 30px 20px;
-    }
-    
-    .sns-links {
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-}
+    width:
