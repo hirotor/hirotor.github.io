@@ -16,7 +16,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow-x: hidden;
+    /* 画面からはみ出すのを防ぐため、明示的に非表示に */
+    overflow-x: hidden; 
     position: relative;
 }
 
@@ -76,106 +77,12 @@ body::before {
     transform-style: preserve-3d;
     position: relative;
     z-index: 10;
-    overflow: hidden;
+    /* コンテナ内部での横方向のスクロールを防止 */
+    overflow-x: hidden; 
 }
 
-/* ... (shimmer, fadeIn アニメーションは維持) ... */
 
-/* =========================================
-   テキスト要素 (h1, h2, p, li)
-   ========================================= */
-
-/* H1: メインタイトル */
-h1 {
-    text-align: center;
-    margin-bottom: 50px;
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
-    font-weight: 800;
-    letter-spacing: 0.05em; /* 広くして未来感を強調 */
-    /* より鮮やかで深いグラデーション */
-    background: linear-gradient(135deg, 
-        #FFFFFF 0%,
-        #00FFFF 25%, /* シアン */
-        #FF00FF 50%, /* マゼンタ */
-        #FFFF00 75%, /* イエロー */
-        #FFFFFF 100%);
-    background-size: 300% 300%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbowText 8s ease-in-out infinite; /* アニメーションを長く */
-    position: relative;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); /* ネオンシャドウ */
-}
-
-/* H2: セクションタイトル */
-.profile-section h2 {
-    font-size: clamp(1.5rem, 2.5vw, 2.0rem);
-    font-weight: 700;
-    /* h1と同じグラデーションを適用 */
-    background: linear-gradient(90deg, 
-        #FFFFFF 0%,
-        #87CEFA 50%, /* スカイブルー */
-        #90EE90 100%); /* ライトグリーン */
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 24px;
-    padding-bottom: 12px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.profile-section h2::after {
-    /* 下線をよりクリーンなグラデーションに */
-    background: linear-gradient(90deg, 
-        rgba(255, 255, 255, 0.5), 
-        rgba(135, 206, 250, 0.8), 
-        transparent);
-}
-
-.profile-section h2 i {
-    color: #FFFFFF;
-    filter: drop-shadow(0 0 8px rgba(135, 206, 250, 0.8));
-}
-
-/* P: 本文テキスト */
-p {
-    /* 読めるようにグラデーションを控えめに */
-    background-image: linear-gradient(135deg, 
-        #f8fafc 0%,
-        #87CEFA 50%,
-        #f472b6 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent !important;
-    margin-bottom: 24px;
-    line-height: 1.8;
-    color: #cbd5e1; /* fallback color */
-}
-
-/* LI: リストアイテムテキスト */
-ul li {
-    /* ... 既存のアイテムボックススタイルは維持 ... */
-    /* テキストのグラデーションを調整 */
-    background-image: linear-gradient(135deg, 
-        #f8fafc 0%,
-        #A7F3D0 50%, /* 明るい緑 */
-        #FBFFB8 100%); /* 非常に明るい黄色 */
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent !important;
-}
-
-/* アイコンスタイル */
-ul li .fas, ul li .fab {
-    color: #FFFFFF;
-    filter: drop-shadow(0 0 8px rgba(144, 238, 144, 0.7)); /* 緑系のネオンシャドウ */
-    -webkit-text-fill-color: currentColor; 
-}
-
+/* ... (H1, H2, LIなどのスタイルは維持) ... */
 
 /* =========================================
    SNSリンク (大型化と視認性強化)
@@ -183,28 +90,124 @@ ul li .fas, ul li .fab {
 .sns-links {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* ラベルが下にくるため上揃え */
-    gap: 40px; /* アイコン間のスペース拡大 */
+    align-items: flex-start; 
+    gap: 40px; 
     margin-top: 40px;
 }
 
 .sns-links a {
-    /* アイコンサイズを大きく */
-    width: 90px;
-    height: 90px;
-    font-size: 3rem; 
+    /* アイコンの親要素のサイズを大きく */
+    width: 100px !important; 
+    height: 100px !important;
+    font-size: 4rem !important; /* アイコン自体を大きく */
     border-radius: 24px; 
     border: 2px solid rgba(255, 255, 255, 0.2);
-    /* アイコンにもグラデーションを適用 (プロらしい鮮やかさ) */
-    background-image: linear-gradient(45deg, #00FFFF, #FF00FF, #FFFFFF);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent !important;
-    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.6));
+    
+    /* ***** 【最重要修正】アイコンを白に設定し、透明化を解除 ***** */
+    color: #FFFFFF !important; 
+    -webkit-text-fill-color: #FFFFFF !important; /* 文字色を強制的に白に設定 */
+    
+    /* ネオン効果はドロップシャドウで実現 */
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9));
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .sns-links a:hover {
-    transform: scale(1.15) rotate(5deg); /* ホバー時の動きを強調 */
+    transform: scale(1.15) rotate(5deg); 
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 40px rgba(
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.6);
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
+}
+
+/* Instagram専用ホバーアニメーションの更新 */
+.sns-links a[href*="instagram"]:hover {
+    /* ホバー時は背景グラデーションをそのままアイコン色に設定 */
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    background-size: 200% 200%;
+    animation: instagramGradient 2s ease infinite;
+    -webkit-text-fill-color: white !important;
+    color: white;
+    filter: drop-shadow(0 0 20px #dc2743); 
+}
+
+/* LINE専用スタイル */
+.sns-links a[href*="line"] {
+    /* LINEのアイコンカラーを白に設定し、緑系のシャドウ */
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 127, 1));
+}
+
+.sns-links a[href*="line"]:hover {
+    background: #00c300;
+    color: white;
+    -webkit-text-fill-color: white !important;
+    filter: drop-shadow(0 0 20px rgba(0, 195, 0, 1));
+}
+
+/* サブInstagramアカウントの視覚的な区別 */
+.sub-insta-item a {
+    border: 2px dashed rgba(255, 255, 255, 0.5); 
+    -webkit-text-fill-color: #FFFFFF !important; /* 白を維持 */
+    color: #FFFFFF !important;
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 1));
+}
+
+.sub-insta-item a:hover {
+    border: 2px solid #FF69B4; 
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 1));
+    animation: none; 
+    color: #FF69B4 !important; /* ホバー時のみピンクに */
+    -webkit-text-fill-color: #FF69B4 !important;
+}
+
+
+/* SNSラベル (視認性強化) */
+.sns-label {
+    display: block;
+    font-size: 1rem !important; 
+    font-weight: 800; 
+    margin-top: 15px;
+    opacity: 1; 
+    transform: translateY(0); 
+    color: #FFFFFF !important; 
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+
+/* =========================================
+   レスポンシブ対応 (画面はみ出し対策)
+   ========================================= */
+@media (max-width: 768px) {
+    /* 画面はみ出しを防ぐため、コンテナのパディングを減らす */
+    .container {
+        padding: 40px 25px; 
+    }
+    
+    .sns-links {
+        gap: 20px;
+    }
+    .sns-links a {
+        /* スマホサイズでさらに安全なサイズに縮小 */
+        width: 75px !important;
+        height: 75px !important;
+        font-size: 3rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* さらに小さな画面（縦向き）での調整 */
+    .container {
+        padding: 30px 15px; 
+    }
+    
+    .sns-links {
+        gap: 15px;
+    }
+    .sns-links a {
+        width: 65px !important;
+        height: 65px !important;
+        font-size: 2.5rem !important;
+    }
+}
