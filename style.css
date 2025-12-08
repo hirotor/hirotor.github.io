@@ -24,7 +24,7 @@ body {
     50% { background-position: 100% 50%; }
 }
 
-/* フローティングパーティクル効果 */
+/* フローティングパーティクル効果 (キラキラ強化) */
 body::before {
     content: '';
     position: fixed;
@@ -32,7 +32,6 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* パーティクルを増やしてキラキラ感を強化 */
     background-image: 
         radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.5), transparent),
         radial-gradient(3px 3px at 40px 70px, rgba(96, 165, 250, 0.6), transparent),
@@ -189,14 +188,15 @@ h1::after {
     transform: translateY(30px);
 }
 
-/* セクション削除に伴い、アニメーション遅延を繰り上げ */
+/* 8つのセクションに合わせてアニメーション遅延を再調整 */
 .profile-section:nth-child(2) { animation-delay: 0.1s; } /* About Me */
 .profile-section:nth-child(3) { animation-delay: 0.2s; } /* 学歴 */
-.profile-section:nth-child(4) { animation-delay: 0.3s; } /* 将来設計 */
-.profile-section:nth-child(5) { animation-delay: 0.4s; } /* 趣味 */
-.profile-section:nth-child(6) { animation-delay: 0.5s; } /* 好きな食べ物 */
-.profile-section:nth-child(7) { animation-delay: 0.6s; } /* 好きなアーティスト */
-.profile-section:nth-child(8) { animation-delay: 0.7s; } /* Links */
+.profile-section:nth-child(4) { animation-delay: 0.3s; } /* 所属団体 (NEW) */
+.profile-section:nth-child(5) { animation-delay: 0.4s; } /* 将来設計 */
+.profile-section:nth-child(6) { animation-delay: 0.5s; } /* 趣味 */
+.profile-section:nth-child(7) { animation-delay: 0.6s; } /* 好きな食べ物 */
+.profile-section:nth-child(8) { animation-delay: 0.7s; } /* 好きなアーティスト */
+.profile-section:nth-child(9) { animation-delay: 0.8s; } /* Links */
 
 @keyframes slideInUp {
     to {
@@ -232,4 +232,311 @@ h1::after {
     content: '';
     flex: 1;
     height: 2px;
-    /* 下線の色をグラ
+    /* 下線の色をグラデーションに合わせる */
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.8), /* 白を強くしてキラキラ感を出す */
+        rgba(96, 165, 250, 0.6), 
+        rgba(167, 243, 208, 0.4), 
+        transparent);
+    border-radius: 1px;
+}
+
+.profile-section h2 i {
+    /* アイコンの色とシャドウを強化 */
+    color: #ffffff; /* アイコン自体は白にして、シャドウで色を出す */
+    filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.8)) drop-shadow(0 0 5px #a7f3d0);
+}
+
+
+/* =========================================
+   リスト要素
+   ========================================= */
+p, ul {
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    line-height: 1.8;
+}
+
+/* pタグにもキラキラを適用 */
+p {
+    background-image: linear-gradient(135deg, 
+        #f8fafc 0%,
+        #60a5fa 50%,
+        #f472b6 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent !important; /* 強制適用 */
+    margin-bottom: 24px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+}
+
+ul li {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    margin-bottom: 0;
+    padding: 18px 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: translateX(30px);
+    animation: fadeInItem 0.6s ease-out forwards;
+    position: relative;
+    overflow: hidden;
+    /* テキストにもグラデーションを適用 */
+    background-image: linear-gradient(135deg, 
+        #f8fafc 0%,
+        #a7f3d0 50%,
+        #fbbf24 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent !important; /* 強制適用 */
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #60a5fa, #a7f3d0);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+ul li:hover {
+    transform: translateY(-8px) translateX(4px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(96, 165, 250, 0.2);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(96, 165, 250, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+ul li:hover::before {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+}
+
+@keyframes fadeInItem {
+    to { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+}
+
+/* リスト項目のアニメーション遅延 (学歴セクションは6項目、所属団体セクションは2項目) */
+/* これはセクションごとにリセットされるため、長いリストのアイテム数だけ定義が必要です。 */
+.profile-section ul li:nth-child(1) { animation-delay: 0.1s; } 
+.profile-section ul li:nth-child(2) { animation-delay: 0.2s; }
+.profile-section ul li:nth-child(3) { animation-delay: 0.3s; }
+.profile-section ul li:nth-child(4) { animation-delay: 0.4s; }
+.profile-section ul li:nth-child(5) { animation-delay: 0.5s; }
+.profile-section ul li:nth-child(6) { animation-delay: 0.6s; }
+.profile-section ul li:nth-child(7) { animation-delay: 0.7s; }
+.profile-section ul li:nth-child(8) { animation-delay: 0.8s; }
+
+/* 学歴セクションのリストは6項目なので、これで十分です。 */
+
+
+/* アイコンスタイル */
+ul li .fas, ul li .fab {
+    margin-right: 16px;
+    width: 24px;
+    text-align: center;
+    /* アイコンの色を統一 */
+    color: #ffffff;
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));
+    transition: all 0.3s ease;
+    /* リストアイテムのグラデーションに影響されないように上書き */
+    -webkit-text-fill-color: currentColor; 
+}
+
+ul li:hover .fas, ul li:hover .fab {
+    color: #a7f3d0;
+    filter: drop-shadow(0 0 12px rgba(167, 243, 208, 0.8));
+    transform: scale(1.1);
+}
+
+
+/* =========================================
+   SNSリンク
+   ========================================= */
+.sns-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-top: 32px;
+}
+
+.sns-link-item {
+    text-align: center;
+    position: relative;
+}
+
+.sns-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    font-size: 2rem;
+    color: #f8fafc;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    /* アイコンにもグラデーションを適用 */
+    background-image: linear-gradient(45deg, #60a5fa, #a7f3d0, #f8fafc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent !important; /* 強制適用 */
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.4));
+}
+
+.sns-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.sns-links a:hover {
+    transform: translateY(-8px) scale(1.1);
+    background: rgba(96, 165, 250, 0.1);
+    border-color: rgba(96, 165, 250, 0.3);
+    /* hover時はグラデーションをリセットし、単色でシャドウを強調 */
+    color: #60a5fa;
+    -webkit-text-fill-color: #60a5fa !important;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(96, 165, 250, 0.2);
+    filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.8));
+}
+
+.sns-links a:hover::before {
+    left: 100%;
+}
+
+/* Instagram専用スタイル（メインアカウント用） */
+.sns-links a[href*="instagram"]:hover {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    background-size: 200% 200%;
+    animation: instagramGradient 2s ease infinite;
+    -webkit-text-fill-color: white !important; /* アイコンを白に戻す */
+    color: white;
+}
+
+@keyframes instagramGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* LINE専用スタイル */
+.sns-links a[href*="line"]:hover {
+    background: #00c300;
+    color: white;
+    -webkit-text-fill-color: white !important;
+}
+
+/* サブInstagramアカウントの視覚的な区別 */
+.sub-insta-item a {
+    /* デフォルトのスタイルを上書き */
+    border: 1px dashed rgba(255, 255, 255, 0.3); /* 点線にしてサブ感を出す */
+    filter: drop-shadow(0 0 8px rgba(244, 114, 182, 0.4)); /* ピンク系のシャドウ */
+    /* アイコンの色を落ち着いたグラデーションに */
+    background-image: linear-gradient(45deg, #f472b6, #fbbf24);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.sub-insta-item a:hover {
+    /* メインのホバースタイルを上書き */
+    border: 1px solid #f472b6; /* ホバー時にピンク系の色を強調 */
+    color: #f472b6;
+    -webkit-text-fill-color: #f472b6 !important;
+    background: rgba(244, 114, 182, 0.1);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(244, 114, 182, 0.2);
+    animation: none; /* メインのInstagramアニメーションを無効化 */
+    filter: drop-shadow(0 0 15px rgba(244, 114, 182, 0.8));
+}
+
+
+/* SNSラベルを常に表示し、より分かりやすくする */
+.sns-label {
+    display: block;
+    font-size: 0.8rem; /* 少し大きく */
+    font-weight: 600; /* 太字に */
+    color: #94a3b8;
+    margin-top: 10px;
+    opacity: 1; /* 常に表示 */
+    transform: translateY(0); /* 位置固定 */
+    transition: color 0.3s ease;
+}
+
+.sns-link-item:hover .sns-label {
+    /* ホバー時の色の変化のみを残す */
+    color: #60a5fa;
+}
+
+.sub-insta-item:hover .sns-label {
+    /* サブアカウントのホバー時はピンク系にする */
+    color: #f472b6;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 15px;
+    }
+    
+    .container {
+        padding: 40px 30px;
+        border-radius: 24px;
+    }
+    
+    .sns-links {
+        gap: 24px;
+    }
+    
+    .sns-links a {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    ul li {
+        padding: 16px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 20px;
+    }
+    
+    .sns-links {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+}
