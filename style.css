@@ -185,13 +185,14 @@ h1::after {
     transform: translateY(30px);
 }
 
-.profile-section:nth-child(2) { animation-delay: 0.1s; }
-.profile-section:nth-child(3) { animation-delay: 0.2s; }
-.profile-section:nth-child(4) { animation-delay: 0.3s; }
-.profile-section:nth-child(5) { animation-delay: 0.4s; }
-.profile-section:nth-child(6) { animation-delay: 0.5s; }
-.profile-section:nth-child(7) { animation-delay: 0.6s; }
-.profile-section:nth-child(8) { animation-delay: 0.7s; }
+/* セクション削除に伴い、アニメーション遅延を繰り上げ */
+.profile-section:nth-child(2) { animation-delay: 0.1s; } /* About Me */
+.profile-section:nth-child(3) { animation-delay: 0.2s; } /* 学歴 */
+.profile-section:nth-child(4) { animation-delay: 0.3s; } /* 将来設計 */
+.profile-section:nth-child(5) { animation-delay: 0.4s; } /* 趣味 */
+.profile-section:nth-child(6) { animation-delay: 0.5s; } /* 好きな食べ物 */
+.profile-section:nth-child(7) { animation-delay: 0.6s; } /* 好きなアーティスト */
+.profile-section:nth-child(8) { animation-delay: 0.7s; } /* Links */
 
 @keyframes slideInUp {
     to {
@@ -383,7 +384,7 @@ ul li:hover .fas, ul li:hover .fab {
     left: 100%;
 }
 
-/* Instagram専用スタイル */
+/* Instagram専用スタイル（メインアカウント用） */
 .sns-links a[href*="instagram"]:hover {
     background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
     background-size: 200% 200%;
@@ -402,21 +403,45 @@ ul li:hover .fas, ul li:hover .fab {
     color: white;
 }
 
+/* サブInstagramアカウントの視覚的な区別 */
+.sub-insta-item a {
+    /* デフォルトのスタイルを上書き */
+    border: 1px dashed rgba(255, 255, 255, 0.3); /* 点線にしてサブ感を出す */
+    color: #94a3b8; /* メインより控えめな色 */
+}
+
+.sub-insta-item a:hover {
+    /* メインのホバースタイルを上書き */
+    border: 1px solid #f472b6; /* ホバー時にピンク系の色を強調 */
+    color: #f472b6;
+    background: rgba(244, 114, 182, 0.1);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(244, 114, 182, 0.2);
+    animation: none; /* メインのInstagramアニメーションを無効化 */
+}
+
+
+/* SNSラベルを常に表示し、より分かりやすくする */
 .sns-label {
     display: block;
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.8rem; /* 少し大きく */
+    font-weight: 600; /* 太字に */
     color: #94a3b8;
-    margin-top: 12px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
+    margin-top: 10px;
+    opacity: 1; /* 常に表示 */
+    transform: translateY(0); /* 位置固定 */
+    transition: color 0.3s ease;
 }
 
 .sns-link-item:hover .sns-label {
-    opacity: 1;
-    transform: translateY(0);
+    /* ホバー時の色の変化のみを残す */
     color: #60a5fa;
+}
+
+.sub-insta-item:hover .sns-label {
+    /* サブアカウントのホバー時はピンク系にする */
+    color: #f472b6;
 }
 
 /* レスポンシブ対応 */
