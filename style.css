@@ -76,4 +76,161 @@ body::before {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform-style: preserve-3d;
     position: relative;
-    z
+    z-index: 10;
+    /* コンテナ内部での横方向のスクロールを防止 */
+    overflow-x: hidden; 
+}
+
+@keyframes fadeIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(50px) scale(0.9) rotateX(10deg); 
+        filter: blur(10px);
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1) rotateX(0deg); 
+        filter: blur(0px);
+    }
+}
+
+
+/* ... (中略：H1, H2, LIなどのスタイルは維持) ... */
+
+
+/* =========================================
+   SNSリンク (アイコン可視性確保とサイズ維持)
+   ========================================= */
+.sns-links {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    gap: 40px; 
+    margin-top: 40px;
+}
+
+.sns-links a {
+    /* アイコンの親要素のサイズを大きく (再適用) */
+    width: 100px !important; 
+    height: 100px !important;
+    font-size: 4rem !important; /* アイコン自体を大きく (再適用) */
+    border-radius: 24px; 
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    
+    /* ***** 修正: 最も安全な方法で白色を適用し、透明化を回避 ***** */
+    color: #FFFFFF !important; 
+    -webkit-text-fill-color: #FFFFFF !important; /* 強制的に白を設定 */
+    
+    /* ネオンシャドウでキラキラ感を表現 (ベースカラー: シアン) */
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9));
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sns-links a:hover {
+    transform: scale(1.15) rotate(5deg); 
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.6);
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
+}
+
+/* Instagram専用ホバーアニメーションの更新 */
+.sns-links a[href*="instagram"]:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    background-size: 200% 200%;
+    animation: instagramGradient 2s ease infinite;
+    -webkit-text-fill-color: white !important;
+    color: white;
+    filter: drop-shadow(0 0 20px #dc2743); 
+}
+
+/* LINE専用スタイル */
+.sns-links a[href*="line"] {
+    /* 修正: 白と緑のシャドウで表現 */
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 127, 1));
+}
+
+.sns-links a[href*="line"]:hover {
+    background: #00c300;
+    color: white;
+    -webkit-text-fill-color: white !important;
+    filter: drop-shadow(0 0 20px rgba(0, 195, 0, 1));
+}
+
+/* サブInstagramアカウントの視覚的な区別 */
+.sub-insta-item a {
+    border: 2px dashed rgba(255, 255, 255, 0.5); 
+    /* 修正: 白とピンクのシャドウで表現 */
+    -webkit-text-fill-color: #FFFFFF !important; 
+    color: #FFFFFF !important;
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 1));
+}
+
+.sub-insta-item a:hover {
+    border: 2px solid #FF69B4; 
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 1));
+    animation: none; 
+    color: #FF69B4 !important; 
+    -webkit-text-fill-color: #FF69B4 !important;
+}
+
+
+/* SNSラベル (視認性強化) */
+.sns-label {
+    display: block;
+    font-size: 1rem !important; 
+    font-weight: 800; 
+    margin-top: 15px;
+    opacity: 1; 
+    transform: translateY(0); 
+    color: #FFFFFF !important; 
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.sns-link-item:hover .sns-label {
+    color: #00FFFF !important; /* メインホバー時: シアン */
+    text-shadow: 0 0 10px #00FFFF;
+}
+
+.sub-insta-item:hover .sns-label {
+    color: #FF69B4 !important; /* サブホバー時: ピンク */
+    text-shadow: 0 0 10px #FF69B4;
+}
+
+/* =========================================
+   レスポンシブ対応 (画面はみ出し対策)
+   ========================================= */
+@media (max-width: 768px) {
+    /* 画面はみ出しを防ぐため、コンテナのパディングを減らす */
+    .container {
+        padding: 40px 25px; 
+    }
+    
+    .sns-links {
+        gap: 20px;
+    }
+    .sns-links a {
+        /* スマホサイズでさらに安全なサイズに縮小 */
+        width: 75px !important;
+        height: 75px !important;
+        font-size: 3rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* さらに小さな画面（縦向き）での調整 */
+    .container {
+        padding: 30px 15px; 
+    }
+    
+    .sns-links {
+        gap: 15px;
+    }
+    .sns-links a {
+        width: 65px !important;
+        height: 65px !important;
+        font-size: 2.5rem !important;
+    }
+}
