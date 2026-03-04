@@ -1,13 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@400;700&display=swap');
+
 /* =========================================
    ベーススタイル (深宇宙/オーロラテーマ)
    ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 body {
-    font-family: 'Inter', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', 'Noto Sans JP', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 40px 20px;
-    /* 背景: 深宇宙のグラデーション */
     background: linear-gradient(135deg, #020024 0%, #090979 35%, #00d4ff 100%);
     background-size: 400% 400%;
     animation: gradientShift 20s ease infinite;
@@ -16,8 +15,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* 画面からはみ出すのを防ぐため、明示的に非表示に */
-    overflow-x: hidden; 
+    overflow-x: hidden;
     position: relative;
 }
 
@@ -26,7 +24,7 @@ body {
     50% { background-position: 100% 50%; }
 }
 
-/* フローティングパーティクル効果 (より繊細な光) */
+/* フローティングパーティクル効果 */
 body::before {
     content: '';
     position: fixed;
@@ -34,12 +32,11 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* パーティクルの色をオーロラカラーに統一 */
     background-image: 
         radial-gradient(1.5px 1.5px at 10% 20%, rgba(255, 255, 255, 0.6), transparent),
-        radial-gradient(2.5px 2.5px at 30% 70%, rgba(135, 206, 250, 0.7), transparent), /* スカイブルー */
-        radial-gradient(1.5px 1.5px at 60% 30%, rgba(144, 238, 144, 0.6), transparent), /* ライトグリーン */
-        radial-gradient(2px 2px at 80% 50%, rgba(255, 192, 203, 0.5), transparent); /* ピンク */
+        radial-gradient(2.5px 2.5px at 30% 70%, rgba(135, 206, 250, 0.7), transparent),
+        radial-gradient(1.5px 1.5px at 60% 30%, rgba(144, 238, 144, 0.6), transparent),
+        radial-gradient(2px 2px at 80% 50%, rgba(255, 192, 203, 0.5), transparent);
     background-repeat: repeat;
     background-size: 150px 150px;
     animation: float 30s linear infinite;
@@ -54,14 +51,12 @@ body::before {
     100% { transform: translate(0, 0) rotate(360deg); }
 }
 
-
 /* =========================================
    コンテナ
    ========================================= */
 .container {
     max-width: 900px;
     width: 100%;
-    /* コンテナの背景をより暗く、高級感のあるグラスモーフィズムに */
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(30px) saturate(150%);
     -webkit-backdrop-filter: blur(30px) saturate(150%);
@@ -77,8 +72,7 @@ body::before {
     transform-style: preserve-3d;
     position: relative;
     z-index: 10;
-    /* コンテナ内部での横方向のスクロールを防止 */
-    overflow-x: hidden; 
+    box-sizing: border-box; /* 画面はみ出し防止 */
 }
 
 @keyframes fadeIn {
@@ -94,143 +88,236 @@ body::before {
     }
 }
 
+/* =========================================
+   タイポグラフィ・コンテンツ (ダークモード最適化)
+   ========================================= */
+h1 {
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+    font-size: 2.2rem;
+    border-bottom: 2px solid rgba(0, 212, 255, 0.4);
+    padding-bottom: 1rem;
+}
 
-/* ... (中略：H1, H2, LIなどのスタイルは維持) ... */
+/* セクションの背景を黒半透明にして文字を読みやすく */
+.profile-section {
+    margin-bottom: 1.8rem;
+    background: rgba(0, 0, 0, 0.4); 
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem;
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
 
+.profile-section:hover {
+    transform: translateY(-3px);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+h2 {
+    font-size: 1.3rem;
+    color: #00d4ff; /* サイバーなシアン */
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+}
+
+h2 i {
+    color: #ff69b4; /* オーロラのピンクに合わせてアクセント */
+    filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.5));
+}
+
+p {
+    line-height: 1.8;
+    margin: 0;
+    font-size: 1.05rem;
+    color: #e2e8f0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.8rem;
+}
+
+li {
+    background: rgba(255, 255, 255, 0.05); /* うっすら白い半透明 */
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.4);
+    transform: translateX(3px); /* ホバーで少し右に動く */
+}
+
+li i {
+    color: #90ee90; /* ライトグリーン */
+    width: 20px;
+    text-align: center;
+    filter: drop-shadow(0 0 3px rgba(144, 238, 144, 0.4));
+}
+
+.list-full-width ul {
+    grid-template-columns: 1fr;
+}
 
 /* =========================================
-   SNSリンク (アイコン可視性確保とサイズ維持)
+   SNSリンク (!importantを排除し詳細度で指定)
    ========================================= */
-.sns-links {
+.profile-section .sns-links {
     display: flex;
     justify-content: center;
     align-items: flex-start; 
     gap: 40px; 
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
-.sns-links a {
-    /* アイコンの親要素のサイズを大きく (再適用) */
-    width: 100px !important; 
-    height: 100px !important;
-    font-size: 4rem !important; /* アイコン自体を大きく (再適用) */
+.profile-section .sns-link-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-section .sns-links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px; 
+    height: 100px;
+    font-size: 4rem; 
     border-radius: 24px; 
     border: 2px solid rgba(255, 255, 255, 0.2);
-    
-    /* ***** 修正: 最も安全な方法で白色を適用し、透明化を回避 ***** */
-    color: #FFFFFF !important; 
-    -webkit-text-fill-color: #FFFFFF !important; /* 強制的に白を設定 */
-    
-    /* ネオンシャドウでキラキラ感を表現 (ベースカラー: シアン) */
-    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9));
+    color: #ffffff; 
+    text-decoration: none;
+    background: transparent;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.sns-links a:hover {
+.profile-section .sns-links a:hover {
     transform: scale(1.15) rotate(5deg); 
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.6);
-    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.4), 0 0 20px rgba(255, 0, 255, 0.3);
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
 }
 
-/* Instagram専用ホバーアニメーションの更新 */
-.sns-links a[href*="instagram"]:hover {
+/* Instagram専用ホバー */
+.profile-section .sns-links a[href*="instagram"]:hover {
     background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
     background-size: 200% 200%;
     animation: instagramGradient 2s ease infinite;
-    -webkit-text-fill-color: white !important;
-    color: white;
-    filter: drop-shadow(0 0 20px #dc2743); 
+    color: #ffffff;
+    border-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(220, 39, 67, 0.8)); 
 }
 
-/* LINE専用スタイル */
-.sns-links a[href*="line"] {
-    /* 修正: 白と緑のシャドウで表現 */
-    -webkit-text-fill-color: #FFFFFF !important;
-    color: #FFFFFF !important;
-    filter: drop-shadow(0 0 15px rgba(0, 255, 127, 1));
+/* LINE専用 */
+.profile-section .sns-links a[href*="line"] {
+    filter: drop-shadow(0 0 15px rgba(0, 255, 127, 0.6));
 }
 
-.sns-links a[href*="line"]:hover {
+.profile-section .sns-links a[href*="line"]:hover {
     background: #00c300;
-    color: white;
-    -webkit-text-fill-color: white !important;
-    filter: drop-shadow(0 0 20px rgba(0, 195, 0, 1));
+    color: #ffffff;
+    border-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(0, 195, 0, 0.8));
 }
 
-/* サブInstagramアカウントの視覚的な区別 */
-.sub-insta-item a {
-    border: 2px dashed rgba(255, 255, 255, 0.5); 
-    /* 修正: 白とピンクのシャドウで表現 */
-    -webkit-text-fill-color: #FFFFFF !important; 
-    color: #FFFFFF !important;
-    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 1));
+/* サブInstagramアカウント */
+.profile-section .sub-insta-item a {
+    border: 2px dashed rgba(255, 255, 255, 0.4); 
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.6));
 }
 
-.sub-insta-item a:hover {
-    border: 2px solid #FF69B4; 
-    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 1));
+.profile-section .sub-insta-item a:hover {
+    border: 2px solid #ff69b4; 
+    background: transparent;
+    color: #ff69b4;
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
     animation: none; 
-    color: #FF69B4 !important; 
-    -webkit-text-fill-color: #FF69B4 !important;
 }
 
-
-/* SNSラベル (視認性強化) */
-.sns-label {
+/* SNSラベル */
+.profile-section .sns-label {
     display: block;
-    font-size: 1rem !important; 
+    font-size: 1rem; 
     font-weight: 800; 
     margin-top: 15px;
-    opacity: 1; 
-    transform: translateY(0); 
-    color: #FFFFFF !important; 
+    color: #ffffff; 
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.sns-link-item:hover .sns-label {
-    color: #00FFFF !important; /* メインホバー時: シアン */
-    text-shadow: 0 0 10px #00FFFF;
+.profile-section .sns-link-item:hover .sns-label {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
 }
 
-.sub-insta-item:hover .sns-label {
-    color: #FF69B4 !important; /* サブホバー時: ピンク */
-    text-shadow: 0 0 10px #FF69B4;
+.profile-section .sub-insta-item:hover .sns-label {
+    color: #ff69b4;
+    text-shadow: 0 0 10px #ff69b4;
+}
+
+@keyframes instagramGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* =========================================
-   レスポンシブ対応 (画面はみ出し対策)
+   レスポンシブ対応
    ========================================= */
 @media (max-width: 768px) {
-    /* 画面はみ出しを防ぐため、コンテナのパディングを減らす */
     .container {
         padding: 40px 25px; 
     }
-    
-    .sns-links {
+    .profile-section .sns-links {
         gap: 20px;
     }
-    .sns-links a {
-        /* スマホサイズでさらに安全なサイズに縮小 */
-        width: 75px !important;
-        height: 75px !important;
-        font-size: 3rem !important;
+    .profile-section .sns-links a {
+        width: 75px;
+        height: 75px;
+        font-size: 3rem;
+    }
+    ul {
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 480px) {
-    /* さらに小さな画面（縦向き）での調整 */
     .container {
         padding: 30px 15px; 
     }
-    
-    .sns-links {
+    h1 {
+        font-size: 1.6rem;
+    }
+    .profile-section .sns-links {
         gap: 15px;
     }
-    .sns-links a {
-        width: 65px !important;
-        height: 65px !important;
-        font-size: 2.5rem !important;
+    .profile-section .sns-links a {
+        width: 65px;
+        height: 65px;
+        font-size: 2.5rem;
     }
 }
