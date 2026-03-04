@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
+    <title>My Profile | Hiroto Takatsuka</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
             </p>
         </div>
 
-        <div class="profile-section">
+        <div class="profile-section list-full-width">
             <h2><i class="fas fa-graduation-cap"></i> 学歴</h2>
             <ul>
                 <li>立命館大学 情報理工学部 セキュリティ・ネットワークコース 在学</li>
@@ -36,11 +36,12 @@
         <div class="profile-section">
             <h2><i class="fas fa-users"></i> 所属団体</h2>
             <ul>
-                <li><i class="fas fa-volleyball-ball"></i>Bucky (volleyball) 所属</li>
-                <li><i class="fas fa-terminal"></i>RiST 所属</li>
+                <li><i class="fas fa-volleyball-ball"></i> Bucky (volleyball) 所属</li>
+                <li><i class="fas fa-terminal"></i> RiST 所属</li>
             </ul>
         </div>
-        <div class="profile-section">
+
+        <div class="profile-section list-full-width">
             <h2><i class="fas fa-flag"></i> 将来設計</h2>
             <ul>
                 <li>情報理工学部で学びながら、自分のスキルを活かして高い収入を得られるようになる</li>
@@ -51,50 +52,47 @@
         <div class="profile-section">
             <h2><i class="fas fa-gamepad"></i> 趣味</h2>
             <ul>
-                <li><i class="fas fa-dumbbell"></i>筋トレ</li>
-                <li><i class="fas fa-running"></i>ランニング</li>
-                <li><i class="fas fa-hot-tub"></i>サウナ</li>
-                <li><i class="fas fa-baseball"></i>野球</li>
+                <li><i class="fas fa-running"></i> マラソン</li>
+                <li><i class="fas fa-dumbbell"></i> 筋トレ</li>
+                <li><i class="fas fa-hot-tub"></i> サウナ</li>
+                <li><i class="fas fa-baseball"></i> 野球</li>
             </ul>
         </div>
 
         <div class="profile-section">
             <h2><i class="fas fa-utensils"></i> 好きな食べ物</h2>
             <ul>
-                <li><i class="fas fa-utensils"></i>ラーメン</li>
-                <li><i class="fas fa-fish"></i>寿司</li>
-                <li><i class="fas fa-fire"></i>焼き肉</li>
+                <li><i class="fas fa-bowl-food"></i> ラーメン</li>
+                <li><i class="fas fa-fish"></i> 寿司</li>
+                <li><i class="fas fa-fire"></i> 鶏むね肉</li>
             </ul>
         </div>
 
         <div class="profile-section">
             <h2><i class="fas fa-music"></i> 好きなアーティスト</h2>
             <ul>
-                <li>King Gnu</li>
-                <li>いきものがかり</li>
-                <li>Mr.Children</li>
-                <li>緑黄色社会</li>
+                <li><i class="fas fa-headphones"></i> King Gnu</li>
+                <li><i class="fas fa-headphones"></i> =LOVE</li>
+                <li><i class="fas fa-headphones"></i> いきものがかり</li>
+                <li><i class="fas fa-headphones"></i> Mr.children</li>
             </ul>
         </div>
 
         <div class="profile-section">
             <h2><i class="fas fa-link"></i> Links</h2>
             <div class="sns-links">
-
                 <div class="sns-link-item">
-                    <a href="https://www.instagram.com/hirotor68" target="_blank" title="Instagram (Main)"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/hirotor68" target="_blank" rel="noopener noreferrer" title="Instagram (Main)"><i class="fab fa-instagram"></i></a>
                     <span class="sns-label">Main</span>
                 </div>
-
                 <div class="sns-link-item sub-insta-item">
-                    <a href="https://www.instagram.com/hirotor_sb68" target="_blank" title="Instagram (Sub)"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/hirotor_sb68" target="_blank" rel="noopener noreferrer" title="Instagram (Sub)"><i class="fab fa-instagram"></i></a>
                     <span class="sns-label">Sub</span>
                 </div>
-                
                 <div class="sns-link-item">
-                    <a href="https://line.me/ti/p/hi_takatsuka_" target="_blank" title="LINE"><i class="fab fa-line"></i></a>
+                    <a href="https://line.me/ti/p/hi_takatsuka_" target="_blank" rel="noopener noreferrer" title="LINE"><i class="fab fa-line"></i></a>
+                    <span class="sns-label">LINE</span>
                 </div>
-
             </div>
         </div>
     </div>
@@ -102,18 +100,25 @@
     <script>
         const container = document.querySelector('.container');
 
-        container.addEventListener('mousemove', (e) => {
-            const { left, top, width, height } = container.getBoundingClientRect();
-            const x = e.clientX - left - width / 2;
-            const y = e.clientY - top - height / 2;
-            const rotateY = (x / (width / 2)) * -10;
-            const rotateX = (y / (height / 2)) * 10;
-            container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-        });
+        // PCなど、マウスカーソルが使えるデバイスのみ3Dエフェクトを有効化 (スマホでの誤動作防止)
+        if (window.matchMedia("(pointer: fine)").matches) {
+            container.addEventListener('mousemove', (e) => {
+                const { left, top, width, height } = container.getBoundingClientRect();
+                const x = e.clientX - left - width / 2;
+                const y = e.clientY - top - height / 2;
+                // 傾きすぎないように少し数値を調整しました
+                const rotateY = (x / (width / 2)) * -6; 
+                const rotateX = (y / (height / 2)) * 6;
+                
+                container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                container.style.transition = 'transform 0.1s ease-out'; // 動かしている時はキビキビと
+            });
 
-        container.addEventListener('mouseleave', () => {
-            container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-        });
+            container.addEventListener('mouseleave', () => {
+                container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                container.style.transition = 'transform 0.6s ease-out'; // マウスが離れたらフワッと元に戻る
+            });
+        }
     </script>
 
 </body>
